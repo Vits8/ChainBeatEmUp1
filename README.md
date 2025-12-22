@@ -1,6 +1,6 @@
 # Unity 2D 
 
-A top-down action game inspired by Hyper Light Drifter, UltraKill etc, featuring dynamic combat, momentum-based movement, and a combo system.
+A top-down action game inspired by Hyper Light Drifter, UltraKill etc, featuring dynamic combat, momentum-based movement, and a combo system. 
 
 ## Table of Contents
 
