@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     public int maxHealth = 40;
     public float moveSpeed = 2f;
     public float attackRange = 1.2f;
-    public float stopDistance = 0.5f; // м≥н≥мальна дистанц≥€ в≥д гравц€
+    public float stopDistance = 0.5f; 
     public int attackDamage = 10;
     public float attackCooldown = 1.2f;
     public float staggerDuration = 0.3f;
@@ -32,8 +32,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation; // ворог не крутитьс€
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate; // плавний рух
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation; 
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate; 
 
         currentHealth = maxHealth;
 
@@ -45,17 +45,17 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         if (player == null) return;
 
-        // “аймер атаки
+        
         if (attackTimer > 0f) attackTimer -= Time.deltaTime;
 
-        // ѕоворот ворога до гравц€
+       
         Vector3 diff = player.position - transform.position;
         if (diff.x > 0.01f)
             transform.localScale = new Vector3(1f, 1f, 1f);
         else if (diff.x < -0.01f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
-        // FSM лог≥ка
+        // FSM 
         switch (currentState)
         {
             case State.Idle:
@@ -69,7 +69,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
                 break;
 
             case State.Attacking:
-                // чекаЇмо зак≥нченн€ PerformAttack
+                // PerformAttack
                 moveDirection = Vector2.zero;
                 break;
 
@@ -95,7 +95,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
         if (dist < stopDistance)
         {
-            // в≥д≥йти назад трохи
             moveDirection = (transform.position - player.position).normalized;
         }
         else if (dist <= attackRange)
@@ -109,23 +108,21 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
         else
         {
-            // рух до гравц€
             moveDirection = (player.position - transform.position).normalized;
         }
     }
 
     private IEnumerator PerformAttack()
     {
-        // јтака гравц€
         if (player.TryGetComponent<IDamageable>(out var dmg))
         {
             Vector2 dir = (player.position - transform.position).normalized;
-            dmg.TakeDamage(attackDamage, dir * attackKnockback); // knockback т≥льки на гравц€
+            dmg.TakeDamage(attackDamage, dir * attackKnockback); // knockback 
         }
 
         attackTimer = attackCooldown;
 
-        yield return new WaitForSeconds(0.2f); // коротка пауза
+        yield return new WaitForSeconds(0.2f); 
 
         if (currentHealth > 0)
             currentState = State.Chasing;
@@ -135,7 +132,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
 
-        // Knockback на ворога
         if (rb != null)
             rb.AddForce(knockback, ForceMode2D.Impulse);
 

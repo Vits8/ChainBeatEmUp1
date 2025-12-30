@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private float hitKnockback = 3f;
     [SerializeField] private float staggerOnHit = 0.18f;
 
-    // Компоненты
+    
     private Rigidbody2D rb;
     public ComboSystem combo;
     private ChainAttack chain;
