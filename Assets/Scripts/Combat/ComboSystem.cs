@@ -13,7 +13,7 @@ public class ComboBonuses
 public class ComboSystem : MonoBehaviour
 {
     [Header("Combo")]
-    [SerializeField] private float comboTimeout = 1.2f; // секунда між ударами
+    [SerializeField] private float comboTimeout = 1.2f; 
     [SerializeField] private int maxCombo = 5;
     [SerializeField] public int currentCombo = 0;
 
@@ -84,4 +84,5 @@ public class ComboSystem : MonoBehaviour
         CurrentBonuses.moveSpeedMult = move;
         CurrentBonuses.damageMult = dmg;
     }
+
 }
